@@ -1,13 +1,14 @@
-import string
-import random
-def greeting(name):
-    return "Hello there " + name
+def synchronousFunction(f, x):
+    results = f(10)
+    return f(x) + f(x * x) + results
 
-def nameGenerator():
-    data = string.digits + string.ascii_lowercase
-    return ''.join([random.choice(data) for _ in range(10)])
 
-def multiCall(f, fInputF, message):
-    return f(fInputF()) + "......" + message
+def printSynchronous():
+    def f(x):
+        print("Call on " + str(x))
+        return int(x / 2)
 
-print(multiCall(greeting, nameGenerator, "Thank you"))
+    return f
+
+
+print(synchronousFunction(printSynchronous(), 254))
